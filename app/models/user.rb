@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
   	validates_length_of :password, :in => 6..20, :on => :create
     before_save { self.email = email.downcase }
 
-
+	has_many :chat_rooms, dependent: :destroy
+	has_many :messages, dependent: :destroy
 =begin
 	def encrypt_password
 	  if password.present?
